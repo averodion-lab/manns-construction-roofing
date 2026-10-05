@@ -7,7 +7,7 @@ export const SITE = {
   smsHref: 'sms:+19122469486',
   status: 'Licensed & Insured',
   description:
-    'Manns Construction & Roofing provides professional roofing, construction, storm restoration, siding, gutters, concrete, and exterior services. Licensed & Insured.',
+    'Manns Construction & Roofing provides professional roofing, construction, remodeling, storm restoration, siding, gutters, concrete, tree removal, land clearing, and equipment services. Licensed & Insured.',
   // TODO: owner to provide. Leave null until confirmed — never invent these.
   address: null as string | null,
   serviceArea: null as string | null,
@@ -37,6 +37,10 @@ export const QUOTE_SERVICES = [
   'Gutters',
   'Construction',
   'Remodeling',
+  'Kitchen Renovation',
+  'Bathroom Renovation',
+  'Painting',
+  'Flooring',
   'Deck',
   'Pole Barn',
   'Concrete',
@@ -44,6 +48,13 @@ export const QUOTE_SERVICES = [
   'Storm Damage',
   'Inspection',
   'Insurance Restoration',
+  'Tree Removal',
+  'Limbs Off Roof',
+  'Land Clearing',
+  'Mulching',
+  'Skid Steer / Excavator Work',
+  'Demolition',
+  'Cleanup',
   'Other',
 ];
 

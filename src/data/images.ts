@@ -37,6 +37,21 @@ export const IMAGES = {
   insulation: unsplash('1607400201889-565b1ee75f8e', 'Installer fitting insulation between wall studs'),
   storm: unsplash('1527482797697-8795b05a13fe', 'Severe storm with a funnel cloud over open land'),
   tools: unsplash('1426927308491-6380b6a9936f', 'Wall of hand tools in a workshop'),
+  excavatorClose: unsplash('1580901368919-7738efb0f87e', 'Excavator working on a rocky site'),
+  excavatorSite: unsplash('1626249893774-e1e0b3a49f4c', 'Excavator and loader on a cleared work site'),
+  siteMachines: unsplash('1503708928676-1cb796a0891e', 'Excavator and loader grading land'),
+  forest: unsplash('1448375240586-882707db888b', 'Dense wooded land with heavy undergrowth'),
+  bigTree: unsplash('1502082553048-f009c37129b9', 'Large mature tree in an open field'),
+  demoInterior: unsplash('1517581177682-a085bb7ffb15', 'Interior room stripped down to the studs during demolition'),
+  paintRoller: unsplash('1562259949-e8e7689d7828', 'Paint roller applying fresh paint to a wall'),
+  paintedRoom: unsplash('1615873968403-89e068629265', 'Living room with a freshly painted deep green accent wall'),
+  floorRoom: unsplash('1581858726788-75bc0f6a952d', 'Bright room with new light wood flooring'),
+  floorDining: unsplash('1560185007-cde436f6a4d0', 'Dining area with hardwood floors'),
+  bathroom: unsplash('1584622650111-993a426fbf0a', 'Renovated bathroom with glass shower and new vanity'),
+  bathroomTub: unsplash('1620626011761-996317b8d101', 'Modern bathroom with a freestanding tub'),
+  vanity: unsplash('1595514535415-dae8580c416c', 'Custom wood vanity with double vessel sinks'),
+  kitchenWhite: unsplash('1507089947368-19c1da9775ae', 'Custom white kitchen with island and pendant lights'),
+  kitchenDark: unsplash('1588854337236-6889d631faa8', 'Custom kitchen with dark cabinets and stone countertops'),
 } satisfies Record<string, Img>;
 
 const WIDTHS = [480, 800, 1200, 1800, 2400];

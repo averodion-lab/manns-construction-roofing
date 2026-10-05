@@ -20,7 +20,7 @@ Marketing and lead-generation website for **Manns Construction & Roofing**. The 
 | Path | Purpose |
 |---|---|
 | `src/data/site.ts` | Business facts, nav, quote dropdown options. **Single source of truth.** |
-| `src/data/services.ts` | All service-page content (17 routes) + homepage service categories |
+| `src/data/services.ts` | All service-page content (23 routes) + homepage service categories |
 | `src/data/projects.ts` | Portfolio entries (currently representative placeholders) |
 | `src/data/images.ts` | Central image map (Unsplash placeholders). Swap `src` for real photos here. |
 | `src/data/icons.ts` | Inline SVG icon paths |
@@ -53,7 +53,7 @@ Forms POST `multipart/form-data` (including photos) to `PUBLIC_FORM_ENDPOINT` (s
 ## Hard Rules
 
 1. **No insurance or legal guarantees.** Never say claims "will be approved," "insurance pays for your roof," "free roof," etc. Approved phrasing: *"We can help document damage and guide you through the restoration process."*
-2. **Equipment services are unconfirmed.** Keep `/equipment-services` copy generic and mark it as pending owner confirmation. Do not invent specific equipment, capabilities, or claims.
+2. **Equipment services are limited to what the owner confirmed:** skid steer, excavator, mulching, land clearing, tree removal, limbs off roofs, demolition, and cleanup. Do not add other equipment or capabilities without confirmation.
 3. **No fabricated facts.** Do not invent years in business, project counts, reviews, testimonials, certifications, awards, team names, or addresses. Use clearly marked placeholders (e.g. `TODO: owner to provide`) instead.
 4. **Stock images are placeholders.** Structure image references so they're easy to replace with real project photos later (central image map or consistent naming). Always include meaningful `alt` text.
 5. **Mobile first.** No horizontal scroll, tap targets ≥ 44px, sticky mobile call button, hamburger nav, readable base font size (≥ 16px).
@@ -66,7 +66,7 @@ Forms POST `multipart/form-data` (including photos) to `PUBLIC_FORM_ENDPOINT` (s
 
 ## Routes
 
-`/` `/about` `/services` `/roofing` `/roof-repair` `/roof-replacement` `/roof-inspections` `/siding` `/gutters` `/construction` `/home-additions` `/remodeling` `/decks` `/pole-barns` `/concrete` `/driveways` `/storm-damage` `/insurance-restoration` `/inspections` `/equipment-services` `/projects` `/contact` `/quote`
+`/` `/about` `/services` `/roofing` `/roof-repair` `/roof-replacement` `/roof-inspections` `/siding` `/gutters` `/construction` `/home-additions` `/remodeling` `/kitchen-bathroom-remodeling` `/painting` `/flooring` `/decks` `/pole-barns` `/concrete` `/driveways` `/storm-damage` `/insurance-restoration` `/inspections` `/equipment-services` `/land-clearing` `/tree-removal` `/demolition` `/projects` `/contact` `/quote`
 
 Use these exact slugs (they're SEO-relevant).
 
@@ -102,7 +102,7 @@ Reuse these instead of inventing new button text.
 
 **Quote form (`/quote`)**
 - First Name, Last Name, Phone, Email, Address
-- Service dropdown: Roofing, Roof Repair, Roof Replacement, Siding, Gutters, Construction, Remodeling, Deck, Pole Barn, Concrete, Driveway, Storm Damage, Inspection, Insurance Restoration, Other
+- Service dropdown: defined in `QUOTE_SERVICES` in `src/data/site.ts` (PDR list plus the added remodeling, tree, land, and demolition services)
 - "Tell us about your project" textarea
 - Photo upload (multiple images; validate type and size)
 - Preferred contact: Phone / Email / Text
@@ -131,4 +131,4 @@ Both forms have client-side validation, accessible labels, inline errors, and a 
 
 ## Pending From Owner
 
-Address and service area, logo and brand colors, real photos, reviews, company history/experience, confirmed equipment services, and form delivery destination (email/CRM).
+Address and service area, logo and brand colors, real photos, reviews, company history/experience, and form delivery destination (email/CRM).

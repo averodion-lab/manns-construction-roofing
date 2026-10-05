@@ -63,7 +63,13 @@ On mobile: hamburger menu plus a highly visible **CALL NOW — 912-246-9486** bu
 | `/storm-damage` | Storm Damage landing page |
 | `/insurance-restoration` | Insurance Restoration |
 | `/inspections` | Inspections |
-| `/equipment-services` | Equipment Services *(details pending owner confirmation)* |
+| `/kitchen-bathroom-remodeling` | Custom Kitchen & Bathroom Renovations |
+| `/painting` | Painting |
+| `/flooring` | Flooring |
+| `/equipment-services` | Skid Steer & Excavator Services |
+| `/land-clearing` | Land Clearing & Mulching |
+| `/tree-removal` | Tree Removal & Limbs Off Roofs |
+| `/demolition` | Demolition & Cleanup |
 | `/projects` | Projects / Portfolio |
 | `/contact` | Contact |
 | `/quote` | Get a Quote |
@@ -109,7 +115,7 @@ Company name, phone, contact form (name, phone, email, service, message), **Call
 ## Content & Compliance Notes
 
 - **No insurance guarantees.** Never promise claim approval or make legal/insurance guarantees. Use language like *"We can help document damage and guide you through the restoration process."*
-- **Equipment services** must be confirmed with the owner before specific claims are published.
+- **Equipment services** are limited to what the owner confirmed: skid steer, excavator, mulching, land clearing, tree removal, limbs off roofs, demolition, and cleanup.
 - Stock photos are placeholders and should be swapped for real project photos.
 
 ## Open Items
@@ -118,7 +124,7 @@ Company name, phone, contact form (name, phone, email, service, message), **Call
 - [ ] Hosting and domain (then set `site` in `astro.config.mjs`)
 - [ ] Form submission endpoint (`PUBLIC_FORM_ENDPOINT`) — must accept file uploads
 - [ ] Business address, Google Maps embed, and service area
-- [ ] Confirmed list of equipment services
+- [x] Confirmed list of equipment services
 - [ ] Logo and brand colors
 - [ ] Real project, team, and before/after photos
 - [ ] Customer reviews/testimonials

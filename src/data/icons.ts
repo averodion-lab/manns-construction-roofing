@@ -28,6 +28,9 @@ export const ICONS = {
   chevron: '<path d="m6 9 6 6 6-6"/>',
   plus: '<path d="M12 5v14M5 12h14"/>',
   upload: '<path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 16v4h16v-4"/>',
+  brush: '<path d="M18 3h3v7h-3z"/><path d="M4 5h14v4H4z"/><path d="M11 9v4h-2v8h4v-8h-2"/>',
+  truck: '<path d="M2 17V9h9l3 4h6v4"/><path d="M11 9V6h4l3 3"/><circle cx="6" cy="18" r="2"/><circle cx="17" cy="18" r="2"/><path d="M8 18h7"/>',
+  tree: '<path d="M12 22v-6"/><path d="M12 2 6 10h3l-4 6h14l-4-6h3z"/>',
   left: '<path d="m15 6-6 6 6 6"/>',
   right: '<path d="m9 6 6 6-6 6"/>',
 } as const;

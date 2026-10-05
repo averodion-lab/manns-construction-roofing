@@ -18,7 +18,7 @@ const trust: { icon: IconName; title: string; text: string }[] = [
   { icon: 'storm', title: 'Storm Damage Assistance', text: 'Inspections, documentation, and restoration.' },
 ];
 
-const marquee = ['Roofing', 'Siding', 'Gutters', 'Home Additions', 'Remodeling', 'Decks', 'Pole Barns', 'Concrete', 'Driveways', 'Storm Restoration', 'Inspections'];
+const marquee = ['Roofing', 'Siding', 'Gutters', 'Kitchens & Baths', 'Painting', 'Flooring', 'Home Additions', 'Decks', 'Pole Barns', 'Concrete', 'Tree Removal', 'Land Clearing', 'Mulching', 'Demolition', 'Storm Restoration'];
 const storm = getService('storm-damage')!;
 const featured = [PROJECTS[0], PROJECTS[3], PROJECTS[6]];
 const catLabel = (id: string) => PROJECT_CATEGORIES.find((c) => c.id === id)?.label ?? id;
@@ -35,8 +35,8 @@ const catLabel = (id: string) => PROJECT_CATEGORIES.find((c) => c.id === id)?.la
         <span class="line rise accent" style="--d:240ms">You Can Count On</span>
       </h1>
       <p class="lead rise" style="--d:340ms">
-        Manns Construction &amp; Roofing provides professional roofing, construction, storm restoration, siding, gutters, concrete,
-        and exterior services. Licensed &amp; Insured.
+        Manns Construction &amp; Roofing provides professional roofing, construction, custom kitchen and bath remodeling, storm
+        restoration, siding, gutters, concrete, tree removal, and land clearing. Licensed &amp; Insured.
       </p>
       <div class="btn-row rise" style="--d:440ms">
         <a class="btn btn--lg" href="/quote">Get a Free Quote <Icon name="arrow" /></a>
@@ -83,8 +83,8 @@ const catLabel = (id: string) => PROJECT_CATEGORIES.find((c) => c.id === id)?.la
         </div>
         <div class="reveal" style="--d:100ms">
           <p class="lead muted">
-            From the roof down to the driveway, Manns Construction &amp; Roofing handles roofing, siding, gutters, construction,
-            concrete, storm restoration, and more — one licensed &amp; insured contractor for your whole property.
+            From the roof to the kitchen to the back forty, Manns Construction &amp; Roofing handles roofing, remodeling, construction,
+            concrete, tree removal, land clearing, and more. One licensed &amp; insured contractor for your whole property.
           </p>
           <a class="link-arrow" href="/services" style="margin-top:12px">View Our Services <Icon name="arrow" /></a>
         </div>
@@ -170,17 +170,17 @@ const catLabel = (id: string) => PROJECT_CATEGORIES.find((c) => c.id === id)?.la
         <p class="eyebrow">04 — Construction</p>
         <h2>From additions to <span class="accent">pole barns.</span></h2>
         <p class="lead muted" style="margin-top:20px">
-          Home additions, remodeling, decks, pole barns, concrete, and exterior construction. Tell us what you want to build and
+          Home additions, custom kitchens and baths, painting, flooring, decks, pole barns, and demolition. Tell us what you want to build and
           we’ll give you a clear plan and a clear price.
         </p>
         <div class="grid" style="margin-top:28px;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))">
           {[
             ['Home Additions', '/home-additions', 'home'],
-            ['Remodeling', '/remodeling', 'hammer'],
+            ['Kitchen & Bath', '/kitchen-bathroom-remodeling', 'droplet'],
+            ['Painting & Flooring', '/painting', 'brush'],
             ['Decks', '/decks', 'layers'],
             ['Pole Barns', '/pole-barns', 'barn'],
-            ['Concrete & Driveways', '/concrete', 'ruler'],
-            ['Equipment & Site Work', '/equipment-services', 'wrench'],
+            ['Demolition & Cleanup', '/demolition', 'hammer'],
           ].map(([l, h, ic]) => (
             <a class="feature" href={h} style="grid-template-columns:auto 1fr;align-items:center;padding:14px 16px;gap:14px">
               <span class="ic" style="width:40px;height:40px;margin:0"><Icon name={ic as IconName} /></span>

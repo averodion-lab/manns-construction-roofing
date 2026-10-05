@@ -10,19 +10,26 @@ const services = [
   ['Siding', '/siding'],
   ['Gutters', '/gutters'],
   ['Concrete & Driveways', '/concrete'],
+  ['Storm Damage', '/storm-damage'],
 ];
 const construction = [
   ['Construction', '/construction'],
   ['Home Additions', '/home-additions'],
-  ['Remodeling', '/remodeling'],
+  ['Kitchen & Bath', '/kitchen-bathroom-remodeling'],
+  ['Painting', '/painting'],
+  ['Flooring', '/flooring'],
   ['Decks', '/decks'],
   ['Pole Barns', '/pole-barns'],
+];
+const land = [
   ['Equipment Services', '/equipment-services'],
+  ['Land Clearing & Mulching', '/land-clearing'],
+  ['Tree Removal', '/tree-removal'],
+  ['Demolition & Cleanup', '/demolition'],
 ];
 const company = [
   ['About', '/about'],
   ['Projects', '/projects'],
-  ['Storm Damage', '/storm-damage'],
   ['Insurance Restoration', '/insurance-restoration'],
   ['Inspections', '/inspections'],
   ['Contact', '/contact'],
@@ -48,6 +55,10 @@ const year = new Date().getFullYear();
       <div>
         <h3>Construction</h3>
         <ul>{construction.map(([l, h]) => <li><a href={h}>{l}</a></li>)}</ul>
+      </div>
+      <div>
+        <h3>Land &amp; Equipment</h3>
+        <ul>{land.map(([l, h]) => <li><a href={h}>{l}</a></li>)}</ul>
       </div>
       <div>
         <h3>Company</h3>
