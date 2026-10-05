@@ -1,0 +1,58 @@
+---
+import Icon from './Icon.astro';
+import { QUOTE_SERVICES, SITE } from '../data/site';
+---
+<div data-form-wrap>
+  <form class="form" data-form="contact" data-endpoint={SITE.formEndpoint} novalidate>
+    <input type="hidden" name="_subject" value="New message — Manns Construction & Roofing website" />
+    <input type="hidden" name="form" value="contact" />
+    <div class="hp" aria-hidden="true">
+      <label>Leave this field empty <input type="text" name="company_website" tabindex="-1" autocomplete="off" /></label>
+    </div>
+
+    <div class="field">
+      <label for="c-name">Name <span class="req">*</span></label>
+      <input id="c-name" name="name" autocomplete="name" required />
+      <p class="err" aria-live="polite"></p>
+    </div>
+    <div class="row row--2">
+      <div class="field">
+        <label for="c-phone">Phone <span class="req">*</span></label>
+        <input id="c-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required data-phone />
+        <p class="err" aria-live="polite"></p>
+      </div>
+      <div class="field">
+        <label for="c-email">Email</label>
+        <input id="c-email" name="email" type="email" autocomplete="email" />
+        <p class="err" aria-live="polite"></p>
+      </div>
+    </div>
+    <div class="field">
+      <label for="c-service">Service</label>
+      <select id="c-service" name="service">
+        <option value="">Select a service…</option>
+        {QUOTE_SERVICES.map((s) => <option value={s}>{s}</option>)}
+      </select>
+    </div>
+    <div class="field">
+      <label for="c-message">Message <span class="req">*</span></label>
+      <textarea id="c-message" name="message" required minlength="5"></textarea>
+      <p class="err" aria-live="polite"></p>
+    </div>
+
+    <p class="form-status" data-status role="alert"></p>
+    <button class="btn btn--lg btn--block" type="submit">Send Message <Icon name="arrow" /></button>
+  </form>
+
+  <div class="form-success" data-success hidden tabindex="-1">
+    <div class="ok"><Icon name="check" /></div>
+    <h2>Message sent</h2>
+    <p>Thank you! Your message has been received. Manns Construction &amp; Roofing will contact you as soon as possible.</p>
+    <a class="btn btn--ink" href={SITE.phoneHref}><Icon name="phone" /> {SITE.phone}</a>
+  </div>
+</div>
+
+<script>
+  import { initForms } from '../scripts/forms';
+  initForms();
+</script>

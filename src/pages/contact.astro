@@ -1,0 +1,43 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import ContactForm from '../components/ContactForm.astro';
+import Icon from '../components/Icon.astro';
+import { SITE } from '../data/site';
+---
+<Base title="Contact" description={`Contact Manns Construction & Roofing. Call ${SITE.phone} or send us a message.`}>
+  <PageHero
+    title="Contact Us"
+    eyebrow={SITE.status}
+    lead="Questions, estimates, or storm damage — call us or send a message and we’ll get back to you as soon as possible."
+    image="houseBrick"
+    crumbs={[{ label: 'Contact' }]}
+  />
+
+  <section class="section">
+    <div class="container split" style="align-items:start">
+      <div class="form-card reveal">
+        <h2 style="font-size:clamp(2rem,4vw,3rem);margin-bottom:24px">Send a message</h2>
+        <ContactForm />
+      </div>
+      <aside class="aside-card on-dark dark-glow reveal" style="--d:100ms">
+        <p class="eyebrow" style="margin:0">Call us</p>
+        <h2 style="font-size:2.4rem">{SITE.name}</h2>
+        <a class="phone-big" href={SITE.phoneHref}><Icon name="phone" />{SITE.phone}</a>
+        <span class="badge" style="justify-self:start;margin:0"><Icon name="shield" /> {SITE.status}</span>
+        {SITE.address && <p>{SITE.address}</p>}
+        {SITE.serviceArea && <p class="muted">Serving {SITE.serviceArea}</p>}
+        <!-- TODO: add Google Maps embed once the business address is provided. -->
+        <div class="btn-row">
+          <a class="btn btn--lg" href={SITE.phoneHref}><Icon name="phone" /> Call Now</a>
+          <a class="btn btn--light btn--lg" href="/quote">Get a Quote</a>
+        </div>
+        <ul class="checklist" style="margin-top:8px">
+          <li><Icon name="check" />Free estimates</li>
+          <li><Icon name="check" />Storm damage inspections</li>
+          <li><Icon name="check" />Roofing, construction &amp; exterior services</li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+</Base>

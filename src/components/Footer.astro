@@ -1,0 +1,63 @@
+---
+import Icon from './Icon.astro';
+import Logo from './Logo.astro';
+import { SITE } from '../data/site';
+
+const services = [
+  ['Roofing', '/roofing'],
+  ['Roof Repair', '/roof-repair'],
+  ['Roof Replacement', '/roof-replacement'],
+  ['Siding', '/siding'],
+  ['Gutters', '/gutters'],
+  ['Concrete & Driveways', '/concrete'],
+];
+const construction = [
+  ['Construction', '/construction'],
+  ['Home Additions', '/home-additions'],
+  ['Remodeling', '/remodeling'],
+  ['Decks', '/decks'],
+  ['Pole Barns', '/pole-barns'],
+  ['Equipment Services', '/equipment-services'],
+];
+const company = [
+  ['About', '/about'],
+  ['Projects', '/projects'],
+  ['Storm Damage', '/storm-damage'],
+  ['Insurance Restoration', '/insurance-restoration'],
+  ['Inspections', '/inspections'],
+  ['Contact', '/contact'],
+  ['Get a Quote', '/quote'],
+];
+const year = new Date().getFullYear();
+---
+<footer class="site-footer dark-glow">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <Logo />
+        <p>{SITE.description}</p>
+        <a class="phone-big" href={SITE.phoneHref}><Icon name="phone" />{SITE.phone}</a>
+        <div><span class="badge"><Icon name="shield" /> {SITE.status}</span></div>
+        {SITE.address && <p>{SITE.address}</p>}
+        {SITE.serviceArea && <p>Serving {SITE.serviceArea}</p>}
+      </div>
+      <div>
+        <h3>Services</h3>
+        <ul>{services.map(([l, h]) => <li><a href={h}>{l}</a></li>)}</ul>
+      </div>
+      <div>
+        <h3>Construction</h3>
+        <ul>{construction.map(([l, h]) => <li><a href={h}>{l}</a></li>)}</ul>
+      </div>
+      <div>
+        <h3>Company</h3>
+        <ul>{company.map(([l, h]) => <li><a href={h}>{l}</a></li>)}</ul>
+      </div>
+    </div>
+    <div class="footer-word" aria-hidden="true">Manns</div>
+    <div class="footer-bottom">
+      <span>© {year} {SITE.name}. All rights reserved.</span>
+      <span>{SITE.status}</span>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,226 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import Img from '../components/Img.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import CtaBand from '../components/CtaBand.astro';
+import SectionBg from '../components/SectionBg.astro';
+import { SITE } from '../data/site';
+import { CATEGORIES, getService } from '../data/services';
+import { PROJECTS, PROJECT_CATEGORIES } from '../data/projects';
+import type { IconName } from '../data/icons';
+
+const trust: { icon: IconName; title: string; text: string }[] = [
+  { icon: 'shield', title: 'Licensed & Insured', text: 'Professional, protected work on your property.' },
+  { icon: 'award', title: 'Quality Work', text: 'Done right the first time, with attention to detail.' },
+  { icon: 'check', title: 'Professional Service', text: 'Clear communication from estimate to cleanup.' },
+  { icon: 'file', title: 'Free Estimates', text: 'A clear, written quote before work begins.' },
+  { icon: 'storm', title: 'Storm Damage Assistance', text: 'Inspections, documentation, and restoration.' },
+];
+
+const marquee = ['Roofing', 'Siding', 'Gutters', 'Home Additions', 'Remodeling', 'Decks', 'Pole Barns', 'Concrete', 'Driveways', 'Storm Restoration', 'Inspections'];
+const storm = getService('storm-damage')!;
+const featured = [PROJECTS[0], PROJECTS[3], PROJECTS[6]];
+const catLabel = (id: string) => PROJECT_CATEGORIES.find((c) => c.id === id)?.label ?? id;
+---
+<Base title={SITE.name}>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-media"><Img img="roofer" eager sizes="100vw" width={1800} /></div>
+    <div class="container">
+      <p class="eyebrow rise" style="--d:0ms">{SITE.status} · Free Estimates</p>
+      <h1>
+        <span class="line rise" style="--d:80ms">Quality Roofing</span>
+        <span class="line rise" style="--d:160ms">&amp; Construction</span>
+        <span class="line rise accent" style="--d:240ms">You Can Count On</span>
+      </h1>
+      <p class="lead rise" style="--d:340ms">
+        Manns Construction &amp; Roofing provides professional roofing, construction, storm restoration, siding, gutters, concrete,
+        and exterior services. Licensed &amp; Insured.
+      </p>
+      <div class="btn-row rise" style="--d:440ms">
+        <a class="btn btn--lg" href="/quote">Get a Free Quote <Icon name="arrow" /></a>
+        <a class="btn btn--ghost btn--lg" href={SITE.phoneHref}><Icon name="phone" /> Call {SITE.phone}</a>
+      </div>
+      <p class="hero-secondary rise" style="--d:520ms">
+        <a class="link-arrow" href="#services" style="color:#fff">Explore Our Services <Icon name="arrow" /></a>
+      </p>
+    </div>
+
+    <div class="stamp" aria-hidden="true">
+      <svg viewBox="0 0 200 200" class="ring">
+        <defs><path id="circ" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0" /></defs>
+        <text font-family="IBM Plex Mono, monospace" font-size="15.5" letter-spacing="4.2" fill="currentColor">
+          <textPath href="#circ">LICENSED &amp; INSURED • FREE ESTIMATES • </textPath>
+        </text>
+      </svg>
+      <div class="stamp-core"><Icon name="shield" /></div>
+    </div>
+  </section>
+
+  <!-- TRUST -->
+  <section class="trust" aria-label="Why choose us">
+    <div class="container">
+      <div class="trust-grid">
+        {trust.map((t, i) => (
+          <div class="trust-item reveal" style={`--d:${i * 60}ms`}>
+            <Icon name={t.icon} />
+            <h3>{t.title}</h3>
+            <p>{t.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="section" id="services">
+    <div class="container">
+      <div class="section-head section-head--split">
+        <div class="reveal">
+          <p class="eyebrow">01 — What we do</p>
+          <h2>More than a <span class="accent">roofing</span> company.</h2>
+        </div>
+        <div class="reveal" style="--d:100ms">
+          <p class="lead muted">
+            From the roof down to the driveway, Manns Construction &amp; Roofing handles roofing, siding, gutters, construction,
+            concrete, storm restoration, and more — one licensed &amp; insured contractor for your whole property.
+          </p>
+          <a class="link-arrow" href="/services" style="margin-top:12px">View Our Services <Icon name="arrow" /></a>
+        </div>
+      </div>
+      <div class="grid grid--4">
+        {CATEGORIES.map((c, i) => <ServiceCard category={c} index={i} />)}
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      {[...marquee, ...marquee].map((m) => <span>{m}</span>)}
+    </div>
+  </div>
+
+  <!-- ROOFING FEATURE -->
+  <section class="section on-paper-2">
+    <div class="container split">
+      <div class="framed reveal">
+        <Img img="roofTearOff" sizes="(min-width: 960px) 50vw, 100vw" />
+        <span class="tag"><Icon name="shield" /> {SITE.status}</span>
+      </div>
+      <div class="reveal" style="--d:100ms">
+        <p class="eyebrow">02 — Roofing</p>
+        <h2>Roofs built to <span class="accent">protect</span> what matters.</h2>
+        <p class="lead muted" style="margin-top:20px">
+          Installation, replacement, repairs, inspections, and maintenance for shingle and metal roofs. We’ll tell you what your
+          roof actually needs — and do the job right.
+        </p>
+        <ul class="checklist checklist--cols mt-l" style="margin-top:28px">
+          {['Roof Repair', 'Roof Replacement', 'New Roof Installation', 'Roof Inspections', 'Leak Repair', 'Metal & Shingle Roofing'].map((x) => (
+            <li><Icon name="check" />{x}</li>
+          ))}
+        </ul>
+        <div class="btn-row" style="margin-top:32px">
+          <a class="btn" href="/roofing">Learn More <Icon name="arrow" /></a>
+          <a class="btn btn--ink" href="/quote?service=Roofing">Get a Roofing Quote</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORM -->
+  <section class="section on-dark has-photo">
+    <SectionBg img="storm" position="center 30%" />
+    <div class="container">
+      <div class="section-head section-head--split">
+        <div class="reveal">
+          <p class="eyebrow">03 — Storm Damage</p>
+          <h2>Storm damage? <span class="accent">We can help.</span></h2>
+        </div>
+        <div class="reveal" style="--d:100ms">
+          <p class="lead muted">
+            Wind, hail, and falling limbs can damage roofs, siding, and gutters in ways you can’t see from the ground. We inspect,
+            document, and restore — and help guide you through the process.
+          </p>
+          <div class="btn-row" style="margin-top:24px">
+            <a class="btn" href="/quote?service=Storm%20Damage">Request Storm Inspection</a>
+            <a class="btn btn--ghost" href={SITE.phoneHref}><Icon name="phone" /> {SITE.phone}</a>
+          </div>
+        </div>
+      </div>
+      <ol class="steps">
+        {storm.process!.map((s, i) => (
+          <li class="reveal" style={`--d:${i * 90}ms`}>
+            <h3>{s.title}</h3>
+            <p>{s.text}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- CONSTRUCTION FEATURE -->
+  <section class="section">
+    <div class="container split split--reverse">
+      <div class="framed reveal">
+        <Img img="framing" sizes="(min-width: 960px) 50vw, 100vw" />
+        <span class="tag"><Icon name="hammer" /> Built Right</span>
+      </div>
+      <div class="reveal" style="--d:100ms">
+        <p class="eyebrow">04 — Construction</p>
+        <h2>From additions to <span class="accent">pole barns.</span></h2>
+        <p class="lead muted" style="margin-top:20px">
+          Home additions, remodeling, decks, pole barns, concrete, and exterior construction. Tell us what you want to build and
+          we’ll give you a clear plan and a clear price.
+        </p>
+        <div class="grid" style="margin-top:28px;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))">
+          {[
+            ['Home Additions', '/home-additions', 'home'],
+            ['Remodeling', '/remodeling', 'hammer'],
+            ['Decks', '/decks', 'layers'],
+            ['Pole Barns', '/pole-barns', 'barn'],
+            ['Concrete & Driveways', '/concrete', 'ruler'],
+            ['Equipment & Site Work', '/equipment-services', 'wrench'],
+          ].map(([l, h, ic]) => (
+            <a class="feature" href={h} style="grid-template-columns:auto 1fr;align-items:center;padding:14px 16px;gap:14px">
+              <span class="ic" style="width:40px;height:40px;margin:0"><Icon name={ic as IconName} /></span>
+              <strong>{l}</strong>
+            </a>
+          ))}
+        </div>
+        <div class="btn-row" style="margin-top:28px">
+          <a class="btn" href="/construction">Talk to Us About Your Project <Icon name="arrow" /></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="section on-paper-2">
+    <div class="container">
+      <div class="section-head section-head--split">
+        <div class="reveal">
+          <p class="eyebrow">05 — Projects</p>
+          <h2>Work that <span class="accent">speaks</span> for itself.</h2>
+        </div>
+        <div class="reveal" style="--d:100ms">
+          <p class="lead muted">Roofing, siding, construction, decks, concrete, and storm restoration projects.</p>
+          <a class="btn btn--ink" href="/projects" style="margin-top:20px">View Our Projects <Icon name="arrow" /></a>
+        </div>
+      </div>
+      <div class="projects">
+        {featured.map((p, i) => (
+          <a class="project reveal" href={`/projects#${p.category}`} style={`--d:${i * 80}ms`}>
+            <Img img={p.images[0]} width={800} max={1200} sizes="(min-width: 1100px) 33vw, (min-width: 700px) 50vw, 100vw" />
+            <span class="meta">
+              <span class="cat">{catLabel(p.category)}</span>
+              <h3>{p.title}</h3>
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand heading="Ready to start your project?" />
+</Base>

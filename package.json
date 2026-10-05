@@ -1,0 +1,14 @@
+{
+  "name": "manns-construction-roofing",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "deploy": "bash scripts/deploy.sh"
+  },
+  "dependencies": {
+    "astro": "^7.3.5"
+  }
+}

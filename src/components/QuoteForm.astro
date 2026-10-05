@@ -1,0 +1,100 @@
+---
+import Icon from './Icon.astro';
+import { QUOTE_SERVICES, SITE } from '../data/site';
+---
+<div data-form-wrap>
+  <form class="form" data-form="quote" data-endpoint={SITE.formEndpoint} novalidate enctype="multipart/form-data">
+    <input type="hidden" name="_subject" value="New quote request — Manns Construction & Roofing website" />
+    <input type="hidden" name="form" value="quote" />
+    <div class="hp" aria-hidden="true">
+      <label>Leave this field empty <input type="text" name="company_website" tabindex="-1" autocomplete="off" /></label>
+    </div>
+
+    <fieldset>
+      <legend><span>01</span> Your information</legend>
+      <div class="row row--2">
+        <div class="field">
+          <label for="q-first">First Name <span class="req">*</span></label>
+          <input id="q-first" name="first_name" autocomplete="given-name" required />
+          <p class="err" aria-live="polite"></p>
+        </div>
+        <div class="field">
+          <label for="q-last">Last Name <span class="req">*</span></label>
+          <input id="q-last" name="last_name" autocomplete="family-name" required />
+          <p class="err" aria-live="polite"></p>
+        </div>
+      </div>
+      <div class="row row--2">
+        <div class="field">
+          <label for="q-phone">Phone Number <span class="req">*</span></label>
+          <input id="q-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required data-phone />
+          <p class="err" aria-live="polite"></p>
+        </div>
+        <div class="field">
+          <label for="q-email">Email <span class="req">*</span></label>
+          <input id="q-email" name="email" type="email" autocomplete="email" required />
+          <p class="err" aria-live="polite"></p>
+        </div>
+      </div>
+      <div class="field">
+        <label for="q-address">Project Address <span class="req">*</span></label>
+        <input id="q-address" name="address" autocomplete="street-address" required />
+        <p class="err" aria-live="polite"></p>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend><span>02</span> Your project</legend>
+      <div class="field">
+        <label for="q-service">What service do you need? <span class="req">*</span></label>
+        <select id="q-service" name="service" required data-service-select>
+          <option value="">Select a service…</option>
+          {QUOTE_SERVICES.map((s) => <option value={s}>{s}</option>)}
+        </select>
+        <p class="err" aria-live="polite"></p>
+      </div>
+      <div class="field">
+        <label for="q-message">Tell us about your project <span class="req">*</span></label>
+        <textarea id="q-message" name="message" required minlength="10" placeholder="What needs to be done? Any damage, measurements, timeline, or questions?"></textarea>
+        <p class="err" aria-live="polite"></p>
+      </div>
+      <div class="field">
+        <span class="label" id="q-photos-label">Photos of the project or damage <span class="muted">(optional)</span></span>
+        <div class="dropzone" data-dropzone>
+          <Icon name="upload" />
+          <strong>Tap to add photos or drag them here</strong>
+          <small>Up to 10 images · 10 MB each</small>
+          <input type="file" name="photos" accept="image/*" multiple aria-labelledby="q-photos-label" data-photos />
+        </div>
+        <ul class="thumbs" data-thumbs></ul>
+        <p class="err" aria-live="polite"></p>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend><span>03</span> How should we reach you?</legend>
+      <div class="choices" role="radiogroup" aria-label="Preferred contact method">
+        <label class="choice"><input type="radio" name="contact_method" value="Phone" checked /><span><Icon name="phone" /> Phone</span></label>
+        <label class="choice"><input type="radio" name="contact_method" value="Email" /><span><Icon name="mail" /> Email</span></label>
+        <label class="choice"><input type="radio" name="contact_method" value="Text" /><span><Icon name="chat" /> Text</span></label>
+      </div>
+    </fieldset>
+
+    <p class="form-status" data-status role="alert"></p>
+
+    <button class="btn btn--lg btn--block" type="submit">Request My Free Quote <Icon name="arrow" /></button>
+    <p class="muted center" style="font-size:.9rem">Prefer to talk? Call <a href={SITE.phoneHref}><strong>{SITE.phone}</strong></a></p>
+  </form>
+
+  <div class="form-success" data-success hidden tabindex="-1">
+    <div class="ok"><Icon name="check" /></div>
+    <h2>Thank you!</h2>
+    <p>Your request has been received. Manns Construction &amp; Roofing will contact you as soon as possible.</p>
+    <a class="btn btn--ink" href={SITE.phoneHref}><Icon name="phone" /> Need us sooner? {SITE.phone}</a>
+  </div>
+</div>
+
+<script>
+  import { initForms } from '../scripts/forms';
+  initForms();
+</script>

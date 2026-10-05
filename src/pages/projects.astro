@@ -1,0 +1,187 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Icon from '../components/Icon.astro';
+import Img from '../components/Img.astro';
+import { PROJECTS, PROJECT_CATEGORIES } from '../data/projects';
+import { IMAGES, imgSrc } from '../data/images';
+import { SITE } from '../data/site';
+
+const catLabel = (id: string) => PROJECT_CATEGORIES.find((c) => c.id === id)?.label ?? id;
+
+// Serialized for the lightbox script.
+const lightboxData = PROJECTS.map((p) => ({
+  title: p.title,
+  category: catLabel(p.category),
+  description: p.description,
+  images: p.images.map((k) => ({ src: imgSrc(k, 1800), alt: IMAGES[k].alt })),
+  before: p.before ? { src: imgSrc(p.before, 1400), alt: IMAGES[p.before].alt } : null,
+}));
+---
+<Base title="Projects" description="Roofing, siding, gutters, construction, decks, pole barns, concrete, and storm damage projects by Manns Construction & Roofing.">
+  <PageHero
+    title="Our Projects"
+    eyebrow="Portfolio"
+    lead="Roofing, siding, gutters, construction, decks, pole barns, concrete, and storm restoration."
+    image="houseBlueRoof"
+    crumbs={[{ label: 'Projects' }]}
+  />
+
+  <section class="section">
+    <div class="container">
+      {SITE.placeholderPhotos && (
+        <p class="notice" style="margin-bottom:32px"><Icon name="camera" /><span>Project photos are coming soon. The images below are representative examples of the types of work we do.</span></p>
+      )}
+
+      <div class="filters" role="group" aria-label="Filter projects by category">
+        <button type="button" data-filter="all" aria-pressed="true">All</button>
+        {PROJECT_CATEGORIES.map((c) => (
+          <button type="button" data-filter={c.id} aria-pressed="false">{c.label}</button>
+        ))}
+      </div>
+
+      <div class="projects" data-projects>
+        {PROJECTS.map((p, i) => (
+          <button type="button" class="project" data-category={p.category} data-index={i} aria-label={`View ${p.title} — ${catLabel(p.category)}`}>
+            <Img img={p.images[0]} width={800} max={1200} sizes="(min-width: 1100px) 33vw, (min-width: 700px) 50vw, 100vw" />
+            <span class="zoom"><Icon name="plus" /></span>
+            <span class="meta">
+              <span class="cat">{catLabel(p.category)}</span>
+              <h3>{p.title}</h3>
+              <p>{p.description}</p>
+            </span>
+          </button>
+        ))}
+      </div>
+      <p class="muted center" data-empty hidden style="padding:48px 0">No projects in this category yet — check back soon.</p>
+    </div>
+  </section>
+
+  <dialog class="lightbox" aria-label="Project gallery" data-lightbox>
+    <div class="lb-top">
+      <span class="count" data-lb-count></span>
+      <button class="lb-btn" type="button" data-lb-close><Icon name="close" /><span class="sr-only">Close</span></button>
+    </div>
+    <div class="lb-stage" data-lb-stage>
+      <button class="lb-btn lb-nav lb-prev" type="button" data-lb-prev><Icon name="left" /><span class="sr-only">Previous photo</span></button>
+      <button class="lb-btn lb-nav lb-next" type="button" data-lb-next><Icon name="right" /><span class="sr-only">Next photo</span></button>
+    </div>
+    <div class="lb-info container">
+      <span class="cat" data-lb-cat></span>
+      <h3 data-lb-title></h3>
+      <p data-lb-desc></p>
+    </div>
+  </dialog>
+
+  <CtaBand heading="Start your project." label="Start Your Project" />
+
+  <script type="application/json" id="project-data" set:html={JSON.stringify(lightboxData)} />
+</Base>
+
+<script>
+  type Pic = { src: string; alt: string };
+  type P = { title: string; category: string; description: string; images: Pic[]; before: Pic | null };
+
+  const data: P[] = JSON.parse(document.getElementById('project-data')!.textContent!);
+  const cards = Array.from(document.querySelectorAll<HTMLButtonElement>('.project'));
+  const filters = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-filter]'));
+  const empty = document.querySelector<HTMLElement>('[data-empty]')!;
+
+  // ---- Filtering (synced with #hash so links like /projects#roofing work)
+  function applyFilter(id: string) {
+    if (!filters.some((f) => f.dataset.filter === id)) id = 'all';
+    filters.forEach((f) => f.setAttribute('aria-pressed', String(f.dataset.filter === id)));
+    let shown = 0;
+    cards.forEach((c) => {
+      const match = id === 'all' || c.dataset.category === id;
+      c.hidden = !match;
+      if (match) shown++;
+    });
+    empty.hidden = shown > 0;
+  }
+  filters.forEach((f) =>
+    f.addEventListener('click', () => {
+      const id = f.dataset.filter!;
+      history.replaceState(null, '', id === 'all' ? location.pathname : `#${id}`);
+      applyFilter(id);
+    })
+  );
+  applyFilter(location.hash.slice(1) || 'all');
+
+  // ---- Lightbox
+  const dlg = document.querySelector<HTMLDialogElement>('[data-lightbox]')!;
+  const stage = dlg.querySelector<HTMLElement>('[data-lb-stage]')!;
+  const q = (sel: string) => dlg.querySelector<HTMLElement>(sel)!;
+  let project = 0;
+  let photo = 0;
+
+  function slides(p: P) {
+    // With a before photo, the first slide is a before/after pair.
+    return p.before ? [null, ...p.images.slice(1)] : p.images;
+  }
+
+  function render() {
+    const p = data[project];
+    const list = slides(p);
+    stage.querySelectorAll('figure').forEach((f) => f.remove());
+    const current = list[photo];
+    const figs: [Pic, string | null][] = current === null ? [[p.before!, 'Before'], [p.images[0], 'After']] : [[current, null]];
+    stage.classList.toggle('is-pair', figs.length === 2);
+    figs.forEach(([pic, label]) => {
+      const fig = document.createElement('figure');
+      const img = document.createElement('img');
+      img.src = pic.src;
+      img.alt = pic.alt;
+      fig.append(img);
+      if (label) {
+        const cap = document.createElement('figcaption');
+        cap.textContent = label;
+        fig.append(cap);
+      }
+      stage.insertBefore(fig, q('[data-lb-prev]'));
+    });
+    q('[data-lb-count]').textContent = `${photo + 1} / ${list.length}`;
+    q('[data-lb-cat]').textContent = p.category;
+    q('[data-lb-title]').textContent = p.title;
+    q('[data-lb-desc]').textContent = p.description;
+    const multi = list.length > 1;
+    q('[data-lb-prev]').hidden = !multi;
+    q('[data-lb-next]').hidden = !multi;
+  }
+
+  function step(d: number) {
+    const n = slides(data[project]).length;
+    photo = (photo + d + n) % n;
+    render();
+  }
+
+  cards.forEach((c) =>
+    c.addEventListener('click', () => {
+      project = Number(c.dataset.index);
+      photo = 0;
+      render();
+      dlg.showModal();
+    })
+  );
+  q('[data-lb-close]').addEventListener('click', () => dlg.close());
+  q('[data-lb-prev]').addEventListener('click', () => step(-1));
+  q('[data-lb-next]').addEventListener('click', () => step(1));
+  dlg.addEventListener('click', (e) => {
+    if (e.target === dlg) dlg.close();
+  });
+  dlg.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') step(-1);
+    if (e.key === 'ArrowRight') step(1);
+  });
+
+  // Swipe on touch devices
+  let x0: number | null = null;
+  stage.addEventListener('touchstart', (e) => (x0 = e.touches[0].clientX), { passive: true });
+  stage.addEventListener('touchend', (e) => {
+    if (x0 === null) return;
+    const dx = e.changedTouches[0].clientX - x0;
+    if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+    x0 = null;
+  });
+</script>

@@ -1,0 +1,10 @@
+---
+// Darkened full-bleed photo behind a dark section. Parent needs class "has-photo".
+import Img from './Img.astro';
+import type { ImageKey } from '../data/images';
+interface Props { img: ImageKey; position?: string }
+const { img, position = 'center' } = Astro.props;
+---
+<div class="section-bg" aria-hidden="true" style={`--pos:${position}`}>
+  <Img img={img} width={1800} sizes="100vw" alt="" />
+</div>

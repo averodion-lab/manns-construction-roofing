@@ -1,0 +1,22 @@
+---
+import Icon from './Icon.astro';
+import Img from './Img.astro';
+import type { Category } from '../data/services';
+
+interface Props { category: Category; index: number }
+const { category: c, index } = Astro.props;
+---
+<article class="svc-card reveal" style={`--d:${(index % 4) * 70}ms`}>
+  <div class="media">
+    <Img img={c.image} width={800} max={1200} sizes="(min-width: 1100px) 25vw, (min-width: 700px) 50vw, 100vw" />
+    <span class="num">{String(index + 1).padStart(2, '0')} / Service</span>
+  </div>
+  <div class="body">
+    <h3><a href={c.href}>{c.name}</a></h3>
+    <p>{c.text}</p>
+    <ul>
+      {c.items.map((i) => <li>{i.href ? <a href={i.href}>{i.label}</a> : i.label}</li>)}
+    </ul>
+    <a class="link-arrow" href={c.href} aria-label={`Learn more about ${c.name}`}>Learn More <Icon name="arrow" /></a>
+  </div>
+</article>

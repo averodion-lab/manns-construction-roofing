@@ -1,0 +1,186 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import Img from '../components/Img.astro';
+import Faq from '../components/Faq.astro';
+import CtaBand from '../components/CtaBand.astro';
+import SectionBg from '../components/SectionBg.astro';
+import { SERVICES, getService, type Service } from '../data/services';
+import { SITE, quoteHref } from '../data/site';
+
+export function getStaticPaths() {
+  return SERVICES.map((service) => ({ params: { slug: service.slug }, props: { service } }));
+}
+
+interface Props { service: Service }
+const { service: s } = Astro.props;
+const related = s.related.map(getService).filter((x): x is Service => Boolean(x));
+const isStorm = s.slug === 'storm-damage';
+---
+<Base title={s.name} description={s.summary}>
+  <PageHero
+    title={s.title}
+    eyebrow={s.eyebrow}
+    lead={s.summary}
+    image={s.image}
+    crumbs={[{ label: 'Services', href: '/services' }, { label: s.name }]}
+  >
+    <div class="btn-row">
+      <a class="btn btn--lg" href={quoteHref(s.cta.service)}>{isStorm ? 'Request a Storm Inspection' : 'Get a Quote'} <Icon name="arrow" /></a>
+      <a class="btn btn--ghost btn--lg" href={SITE.phoneHref}><Icon name="phone" /> {isStorm ? `Call ${SITE.phone}` : 'Call Now'}</a>
+    </div>
+  </PageHero>
+
+  <!-- INTRO + INCLUDES -->
+  <section class="section">
+    <div class="container">
+      {(s.notice || s.pending) && (
+        <div class="stack" style="margin-bottom:48px">
+          {s.notice && (
+            <div class="notice"><Icon name="shield" /><p><strong>Please note:</strong> {s.notice}</p></div>
+          )}
+          {s.pending && import.meta.env.DEV && (
+            <p class="pending-note">DEV NOTE: Equipment services must be confirmed with the owner before publishing specific claims.</p>
+          )}
+        </div>
+      )}
+      <div class="split" style="align-items:start">
+        <div class="reveal">
+          <p class="eyebrow">Overview</p>
+          <h2>{s.name}</h2>
+          <div class="stack lead muted" style="margin-top:22px">
+            {s.intro.map((p) => <p>{p}</p>)}
+          </div>
+        </div>
+        <div class="reveal" style="--d:100ms">
+          <h3 style="margin-bottom:8px">{s.includesHeading ?? 'What’s included'}</h3>
+          <ul class="checklist">
+            {s.includes.map((x) => <li><Icon name="check" />{x}</li>)}
+          </ul>
+          <div class="btn-row" style="margin-top:28px">
+            <a class="btn" href={quoteHref(s.cta.service)}>{s.cta.label}</a>
+            <a class="btn btn--ink" href={SITE.phoneHref}><Icon name="phone" /> Call Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUB-SERVICES -->
+  {s.subservices && (
+    <section class="section on-paper-2">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow reveal">Services</p>
+          <h2 class="reveal">Our {s.name.toLowerCase()} services</h2>
+        </div>
+        <div class="grid grid--4">
+          {s.subservices.map((f, i) => (
+            <a class="feature reveal" href={f.href} style={`--d:${(i % 4) * 60}ms`}>
+              <span class="ic"><Icon name={f.icon ?? 'check'} /></span>
+              <h3>{f.title}</h3>
+              <p>{f.text}</p>
+              <span class="link-arrow">Learn More <Icon name="arrow" /></span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- PROCESS -->
+  {s.process && (
+    <section class="section on-dark has-photo">
+      <SectionBg img="storm" position="center 30%" />
+      <div class="container">
+        <div class="section-head section-head--split">
+          <div class="reveal">
+            <p class="eyebrow">How it works</p>
+            <h2>Our storm damage <span class="accent">process</span></h2>
+          </div>
+          <p class="lead muted reveal" style="--d:100ms">
+            From your first call to the final repair, here’s what to expect.
+          </p>
+        </div>
+        <ol class="steps">
+          {s.process.map((p, i) => (
+            <li class="reveal" style={`--d:${i * 90}ms`}>
+              <h3>{p.title}</h3>
+              <p>{p.text}</p>
+            </li>
+          ))}
+        </ol>
+        <div class="btn-row" style="margin-top:48px">
+          <a class="btn btn--lg" href={quoteHref(s.cta.service)}>Request a Storm Inspection <Icon name="arrow" /></a>
+          <a class="btn btn--ghost btn--lg" href={SITE.phoneHref}><Icon name="phone" /> Call {SITE.phone}</a>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- BENEFITS -->
+  <section class={`section ${s.process ? '' : 'dark-glow on-dark'}`}>
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow reveal">Why it matters</p>
+        <h2 class="reveal">{s.benefitsHeading ?? `Why choose Manns for ${s.name.toLowerCase()}`}</h2>
+      </div>
+      <div class="grid grid--4">
+        {s.benefits.map((b, i) => (
+          <div class="feature reveal" style={`--d:${i * 60}ms`}>
+            <span class="ic"><Icon name={b.icon ?? 'check'} /></span>
+            <h3>{b.title}</h3>
+            <p>{b.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class={`section ${s.process ? 'on-paper-2' : ''}`}>
+    <div class="container">
+      <div class="section-head section-head--split">
+        <div class="reveal">
+          <p class="eyebrow">Project photos</p>
+          <h2>{s.name} projects</h2>
+        </div>
+        <div class="reveal" style="--d:100ms">
+          <a class="btn btn--ink" href={s.projectCategory ? `/projects#${s.projectCategory}` : '/projects'}>View Our Projects <Icon name="arrow" /></a>
+        </div>
+      </div>
+      <div class="gallery-strip reveal">
+        {s.gallery.map((g, i) => (
+          <figure>
+            <Img img={g} width={i === 0 ? 1200 : 800} max={i === 0 ? 1800 : 1200} sizes={i === 0 ? '(min-width: 700px) 58vw, 100vw' : '(min-width: 700px) 42vw, 100vw'} />
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class={`section ${s.process ? '' : 'on-paper-2'}`}>
+    <div class="container split" style="align-items:start">
+      <div class="reveal">
+        <p class="eyebrow">FAQ</p>
+        <h2>Common questions</h2>
+        <p class="lead muted" style="margin-top:20px">Don’t see your question? Call us at <a href={SITE.phoneHref}><strong>{SITE.phone}</strong></a>.</p>
+        {related.length > 0 && (
+          <div style="margin-top:40px">
+            <h3 style="margin-bottom:12px">Related services</h3>
+            <ul class="checklist">
+              {related.map((r) => (
+                <li><Icon name="arrow" /><a href={`/${r.slug}`}>{r.name}</a></li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+      <div class="reveal" style="--d:100ms"><Faq items={s.faqs} /></div>
+    </div>
+  </section>
+
+  <CtaBand heading={s.cta.heading} label={s.cta.label} service={s.cta.service} />
+</Base>

@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import { SITE } from '../data/site';
+---
+<Base title="Page Not Found">
+  <PageHero title="Page not found" eyebrow="404" lead="The page you’re looking for doesn’t exist. Let’s get you back on track." image="tools">
+    <div class="btn-row">
+      <a class="btn btn--lg" href="/">Back to Home <Icon name="arrow" /></a>
+      <a class="btn btn--ghost btn--lg" href={SITE.phoneHref}><Icon name="phone" /> Call {SITE.phone}</a>
+    </div>
+  </PageHero>
+</Base>

@@ -1,0 +1,52 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Icon from '../components/Icon.astro';
+import { CATEGORIES, SERVICES } from '../data/services';
+import { SITE } from '../data/site';
+---
+<Base title="Services" description="Roofing, siding, gutters, construction, concrete, storm damage, inspections, and equipment services from Manns Construction & Roofing.">
+  <PageHero
+    title="Our Services"
+    eyebrow="Roofing · Construction · Exterior"
+    lead="One licensed & insured contractor for your roof, exterior, and construction projects."
+    image="framingBuilding"
+    crumbs={[{ label: 'Services' }]}
+  >
+    <div class="btn-row">
+      <a class="btn btn--lg" href="/quote">Get a Free Quote <Icon name="arrow" /></a>
+      <a class="btn btn--ghost btn--lg" href={SITE.phoneHref}><Icon name="phone" /> Call Now</a>
+    </div>
+  </PageHero>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid grid--4">
+        {CATEGORIES.map((c, i) => <ServiceCard category={c} index={i} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section on-paper-2">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow reveal">All services</p>
+        <h2 class="reveal">Find your service</h2>
+      </div>
+      <div class="grid grid--3">
+        {SERVICES.map((s, i) => (
+          <a class="feature reveal" href={`/${s.slug}`} style={`--d:${(i % 3) * 60}ms`}>
+            <span class="eyebrow" style="margin:0">{s.eyebrow}</span>
+            <h3>{s.name}</h3>
+            <p>{s.summary}</p>
+            <span class="link-arrow">Learn More <Icon name="arrow" /></span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>

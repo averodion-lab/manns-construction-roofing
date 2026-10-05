@@ -1,0 +1,88 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import SectionBg from '../components/SectionBg.astro';
+import Icon from '../components/Icon.astro';
+import Img from '../components/Img.astro';
+import { SITE } from '../data/site';
+import type { IconName } from '../data/icons';
+
+// TODO: owner to provide company history, years of experience, and a team photo.
+const values: { icon: IconName; title: string; text: string }[] = [
+  { icon: 'award', title: 'Commitment to Quality', text: 'We take pride in work that’s done right — the details you see and the ones you don’t.' },
+  { icon: 'phone', title: 'Customer Service', text: 'Straight answers, clear quotes, and calls returned. You’ll always know where your project stands.' },
+  { icon: 'shield', title: 'Licensed & Insured', text: 'Professional, protected work on your home or property.' },
+  { icon: 'home', title: 'Respect for Your Property', text: 'We protect your home and landscaping and clean up when the job is done.' },
+];
+const services = ['Roofing', 'Siding', 'Gutters', 'Construction & Additions', 'Remodeling', 'Decks', 'Pole Barns', 'Concrete & Driveways', 'Storm Damage Restoration', 'Inspections', 'Equipment Services'];
+---
+<Base title="About" description="Manns Construction & Roofing is a licensed & insured roofing and construction company committed to quality work and professional service.">
+  <PageHero
+    title="About Manns Construction & Roofing"
+    eyebrow="About us"
+    lead="A licensed & insured roofing and construction company built on quality work and honest service."
+    image="blueprints"
+    crumbs={[{ label: 'About' }]}
+  />
+
+  <section class="section">
+    <div class="container split">
+      <div class="reveal">
+        <p class="eyebrow">Who we are</p>
+        <h2>Built on <span class="accent">quality</span> and trust.</h2>
+        <div class="stack lead muted" style="margin-top:22px">
+          <p>
+            Manns Construction &amp; Roofing is a licensed &amp; insured contractor providing roofing, construction, storm
+            restoration, siding, gutters, concrete, and exterior services.
+          </p>
+          <p>
+            We believe homeowners deserve a contractor who shows up, communicates clearly, and does the job right. Whether it’s a
+            small roof repair or a new addition, every project gets the same attention to detail.
+          </p>
+        </div>
+        <span class="badge" style="color:var(--copper);border-color:var(--copper)"><Icon name="shield" /> {SITE.status}</span>
+      </div>
+      <div class="framed reveal" style="--d:100ms">
+        <!-- TODO: replace with a real company or team photo -->
+        <Img img="hardHats" sizes="(min-width: 960px) 50vw, 100vw" />
+        <span class="tag"><Icon name="hammer" /> Quality Work</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section on-dark has-photo">
+    <SectionBg img="framingBuilding" />
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow reveal">What we stand for</p>
+        <h2 class="reveal">How we work</h2>
+      </div>
+      <div class="grid grid--4">
+        {values.map((v, i) => (
+          <div class="feature reveal" style={`--d:${i * 60}ms`}>
+            <span class="ic"><Icon name={v.icon} /></span>
+            <h3>{v.title}</h3>
+            <p>{v.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container split" style="align-items:start">
+      <div class="reveal">
+        <p class="eyebrow">Services provided</p>
+        <h2>One contractor. <span class="accent">Your whole property.</span></h2>
+        <p class="lead muted" style="margin-top:20px">From the roof to the driveway, we handle the work so you don’t have to juggle multiple contractors.</p>
+        <a class="btn" href="/services" style="margin-top:28px">View Our Services <Icon name="arrow" /></a>
+      </div>
+      <ul class="checklist checklist--cols reveal" style="--d:100ms">
+        {services.map((s) => <li><Icon name="check" />{s}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <CtaBand heading="Talk to Manns Construction & Roofing." label="Talk to Us" href="/contact" secondary={{ label: 'Get a Free Quote', href: '/quote' }} />
+</Base>

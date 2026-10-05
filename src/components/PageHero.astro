@@ -1,0 +1,32 @@
+---
+import Img from './Img.astro';
+import type { ImageKey } from '../data/images';
+
+interface Props {
+  title: string;
+  eyebrow?: string;
+  lead?: string;
+  image: ImageKey;
+  crumbs?: { label: string; href?: string }[];
+}
+const { title, eyebrow, lead, image, crumbs = [] } = Astro.props;
+---
+<section class="page-hero">
+  <div class="hero-media"><Img img={image} eager sizes="100vw" /></div>
+  <div class="container">
+    {crumbs.length > 0 && (
+      <nav aria-label="Breadcrumb">
+        <ol class="crumbs">
+          <li><a href="/">Home</a></li>
+          {crumbs.map((c) => (
+            <li>{c.href ? <a href={c.href}>{c.label}</a> : <span aria-current="page">{c.label}</span>}</li>
+          ))}
+        </ol>
+      </nav>
+    )}
+    {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+    <h1>{title}</h1>
+    {lead && <p class="lead">{lead}</p>}
+    <slot />
+  </div>
+</section>

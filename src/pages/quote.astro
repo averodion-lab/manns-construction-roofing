@@ -1,0 +1,36 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import QuoteForm from '../components/QuoteForm.astro';
+import Icon from '../components/Icon.astro';
+import { SITE } from '../data/site';
+---
+<Base title="Get a Free Quote" description="Request a free quote from Manns Construction & Roofing for roofing, construction, siding, gutters, concrete, storm damage, and more.">
+  <PageHero
+    title="Get a Free Quote"
+    eyebrow="Free estimates · No obligation"
+    lead="Tell us about your project. Add photos if you have them — it helps us give you a more accurate quote."
+    image="houseDusk"
+    crumbs={[{ label: 'Get a Quote' }]}
+  />
+
+  <section class="section">
+    <div class="container split" style="align-items:start">
+      <div class="form-card reveal">
+        <QuoteForm />
+      </div>
+      <aside class="aside-card on-dark dark-glow reveal" style="--d:100ms;position:sticky;top:calc(var(--header-h) + 24px)">
+        <p class="eyebrow" style="margin:0">Prefer to call?</p>
+        <a class="phone-big" href={SITE.phoneHref}><Icon name="phone" />{SITE.phone}</a>
+        <span class="badge" style="justify-self:start;margin:0"><Icon name="shield" /> {SITE.status}</span>
+        <h3 style="margin-top:12px">What happens next</h3>
+        <ol class="checklist">
+          <li><Icon name="check" />We review your request and photos.</li>
+          <li><Icon name="check" />We contact you by your preferred method.</li>
+          <li><Icon name="check" />We schedule a visit or inspection if needed.</li>
+          <li><Icon name="check" />You get a clear, written quote.</li>
+        </ol>
+      </aside>
+    </div>
+  </section>
+</Base>

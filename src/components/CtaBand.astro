@@ -1,0 +1,41 @@
+---
+import Icon from './Icon.astro';
+import SectionBg from './SectionBg.astro';
+import { SITE, quoteHref } from '../data/site';
+import type { ImageKey } from '../data/images';
+
+interface Props {
+  heading?: string;
+  text?: string;
+  label?: string;
+  href?: string;
+  service?: string;
+  secondary?: { label: string; href: string };
+  bg?: ImageKey;
+}
+const {
+  heading = 'Start your project today.',
+  text = 'Free estimates. Licensed & insured. Call now or request a quote online and we’ll get back to you as soon as possible.',
+  label = 'Get a Free Quote',
+  service,
+  href = quoteHref(service),
+  secondary = { label: 'Contact Us', href: '/contact' },
+  bg = 'houseDusk',
+} = Astro.props;
+---
+<section class="section cta-band on-dark has-photo gable">
+  <SectionBg img={bg} position="center 40%" />
+  <div class="container">
+    <div class="reveal">
+      <p class="eyebrow">Free estimates · {SITE.status}</p>
+      <h2>{heading}</h2>
+      <p class="lead muted" style="margin-top:18px">{text}</p>
+      <a class="phone-big" href={SITE.phoneHref}><Icon name="phone" />{SITE.phone}</a>
+    </div>
+    <div class="btn-col reveal" style="--d:120ms">
+      <a class="btn btn--lg" href={href}>{label} <Icon name="arrow" /></a>
+      <a class="btn btn--ghost btn--lg" href={SITE.phoneHref}><Icon name="phone" /> Call Now</a>
+      {secondary && <a class="link-arrow" href={secondary.href}>{secondary.label} <Icon name="arrow" /></a>}
+    </div>
+  </div>
+</section>
