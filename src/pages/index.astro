@@ -18,43 +18,31 @@ const trust: { icon: IconName; title: string; text: string }[] = [
   { icon: 'storm', title: 'Storm Damage Assistance', text: 'Inspections, documentation, and restoration.' },
 ];
 
-const marquee = ['Roofing', 'Siding', 'Gutters', 'Kitchens & Baths', 'Painting', 'Flooring', 'Home Additions', 'Decks', 'Pole Barns', 'Concrete', 'Tree Removal', 'Land Clearing', 'Mulching', 'Demolition', 'Storm Restoration'];
 const storm = getService('storm-damage')!;
 const featured = [PROJECTS[0], PROJECTS[3], PROJECTS[6]];
 const catLabel = (id: string) => PROJECT_CATEGORIES.find((c) => c.id === id)?.label ?? id;
 ---
 <Base title={SITE.name}>
   <!-- HERO -->
-  <section class="hero">
-    <div class="hero-media"><Img img="roofer" eager sizes="100vw" width={1800} /></div>
+  <section class="hero hero--owner">
+    <div class="hero-media hero-media--owner"><Img img="ownerHouse" eager sizes="100vw" width={1800} /></div>
     <div class="container">
-      <p class="eyebrow rise" style="--d:0ms">{SITE.status} · Free Estimates</p>
+      <p class="eyebrow">{SITE.location} · {SITE.status}</p>
       <h1>
-        <span class="line rise" style="--d:80ms">Quality Roofing</span>
-        <span class="line rise" style="--d:160ms">&amp; Construction</span>
-        <span class="line rise accent" style="--d:240ms">You Can Count On</span>
+        <span class="line">Quality Roofing</span>
+        <span class="line">&amp; Construction</span>
+        <span class="line accent">You Can Count On</span>
       </h1>
-      <p class="lead rise" style="--d:340ms">
-        Manns Construction &amp; Roofing provides professional roofing, construction, custom kitchen and bath remodeling, storm
-        restoration, siding, gutters, concrete, tree removal, and land clearing. Licensed &amp; Insured.
+      <p class="lead">
+        Roofing, remodeling, storm repair, and land work for homeowners across {SITE.serviceArea}. Call for a free estimate.
       </p>
-      <div class="btn-row rise" style="--d:440ms">
+      <div class="btn-row">
         <a class="btn btn--lg" href="/quote">Get a Free Quote <Icon name="arrow" /></a>
         <a class="btn btn--ghost btn--lg" href={SITE.phoneHref}><Icon name="phone" /> Call {SITE.phone}</a>
       </div>
-      <p class="hero-secondary rise" style="--d:520ms">
+      <p class="hero-secondary">
         <a class="link-arrow" href="#services" style="color:#fff">Explore Our Services <Icon name="arrow" /></a>
       </p>
-    </div>
-
-    <div class="stamp" aria-hidden="true">
-      <svg viewBox="0 0 200 200" class="ring">
-        <defs><path id="circ" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0" /></defs>
-        <text font-family="IBM Plex Mono, monospace" font-size="15.5" letter-spacing="4.2" fill="currentColor">
-          <textPath href="#circ">LICENSED &amp; INSURED • FREE ESTIMATES • </textPath>
-        </text>
-      </svg>
-      <div class="stamp-core"><Icon name="shield" /></div>
     </div>
   </section>
 
@@ -78,8 +66,8 @@ const catLabel = (id: string) => PROJECT_CATEGORIES.find((c) => c.id === id)?.la
     <div class="container">
       <div class="section-head section-head--split">
         <div class="reveal">
-          <p class="eyebrow">01 — What we do</p>
-          <h2>More than a <span class="accent">roofing</span> company.</h2>
+          <p class="eyebrow">What we do</p>
+          <h2>Roofing, remodeling, and land work.</h2>
         </div>
         <div class="reveal" style="--d:100ms">
           <p class="lead muted">
@@ -95,22 +83,16 @@ const catLabel = (id: string) => PROJECT_CATEGORIES.find((c) => c.id === id)?.la
     </div>
   </section>
 
-  <div class="marquee" aria-hidden="true">
-    <div class="marquee-track">
-      {[...marquee, ...marquee].map((m) => <span>{m}</span>)}
-    </div>
-  </div>
 
   <!-- ROOFING FEATURE -->
   <section class="section on-paper-2">
     <div class="container split">
       <div class="framed reveal">
         <Img img="roofTearOff" sizes="(min-width: 960px) 50vw, 100vw" />
-        <span class="tag"><Icon name="shield" /> {SITE.status}</span>
-      </div>
+              </div>
       <div class="reveal" style="--d:100ms">
-        <p class="eyebrow">02 — Roofing</p>
-        <h2>Roofs built to <span class="accent">protect</span> what matters.</h2>
+        <p class="eyebrow">Roofing</p>
+        <h2>Repairs, replacements, and new roofs.</h2>
         <p class="lead muted" style="margin-top:20px">
           Installation, replacement, repairs, inspections, and maintenance for shingle and metal roofs. We’ll tell you what your
           roof actually needs — and do the job right.
@@ -134,7 +116,7 @@ const catLabel = (id: string) => PROJECT_CATEGORIES.find((c) => c.id === id)?.la
     <div class="container">
       <div class="section-head section-head--split">
         <div class="reveal">
-          <p class="eyebrow">03 — Storm Damage</p>
+          <p class="eyebrow">Storm Damage</p>
           <h2>Storm damage? <span class="accent">We can help.</span></h2>
         </div>
         <div class="reveal" style="--d:100ms">
@@ -164,11 +146,10 @@ const catLabel = (id: string) => PROJECT_CATEGORIES.find((c) => c.id === id)?.la
     <div class="container split split--reverse">
       <div class="framed reveal">
         <Img img="framing" sizes="(min-width: 960px) 50vw, 100vw" />
-        <span class="tag"><Icon name="hammer" /> Built Right</span>
-      </div>
+              </div>
       <div class="reveal" style="--d:100ms">
-        <p class="eyebrow">04 — Construction</p>
-        <h2>From additions to <span class="accent">pole barns.</span></h2>
+        <p class="eyebrow">Construction</p>
+        <h2>From additions to pole barns.</h2>
         <p class="lead muted" style="margin-top:20px">
           Home additions, custom kitchens and baths, painting, flooring, decks, pole barns, and demolition. Tell us what you want to build and
           we’ll give you a clear plan and a clear price.
@@ -200,8 +181,8 @@ const catLabel = (id: string) => PROJECT_CATEGORIES.find((c) => c.id === id)?.la
     <div class="container">
       <div class="section-head section-head--split">
         <div class="reveal">
-          <p class="eyebrow">05 — Projects</p>
-          <h2>Work that <span class="accent">speaks</span> for itself.</h2>
+          <p class="eyebrow">Projects</p>
+          <h2>Recent work</h2>
         </div>
         <div class="reveal" style="--d:100ms">
           <p class="lead muted">Roofing, siding, construction, decks, concrete, and storm restoration projects.</p>

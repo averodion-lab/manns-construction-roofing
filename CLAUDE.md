@@ -44,7 +44,8 @@ Forms POST `multipart/form-data` (including photos) to `PUBLIC_FORM_ENDPOINT` (s
 | Phone (display) | 912-246-9486 |
 | Phone (link) | `tel:+19122469486` |
 | Status | Licensed & Insured |
-| Address / service area | **Not provided yet.** Do not invent one. |
+| Location | Based in **Vidalia, GA** (street address not provided yet; do not invent one) |
+| Service area | South Georgia and North Florida |
 
 - Keep business info in one shared config/constant and import it everywhere. Never hardcode the phone number in multiple places.
 - Every visible phone number must be a tap-to-call `tel:` link.
@@ -117,18 +118,18 @@ Both forms have client-side validation, accessible labels, inline errors, and a 
 
 - Professional construction look: trust, strength, quality, local service. Avoid generic template aesthetics.
 - Large hero photography, strong typography, modern cards, subtle shadows, smooth but restrained animations (respect `prefers-reduced-motion`).
-- Brand colors and logo are **not yet provided**. The current look is a placeholder identity: charcoal `--ink`, limestone `--paper`, copper `--copper` accent; fonts are Big Shoulders Display (headings), Barlow (body), and IBM Plex Mono (labels). Change these via the tokens in `global.css`.
-- Signature details to keep consistent: clipped-corner buttons, roof-pitch (`.gable`) section edges, dark sections either photo-backed (`.has-photo` + `<SectionBg img=…>`) or a copper-glow gradient (`.dark-glow`), mono eyebrow labels.
+- Brand colors and logo are **not yet provided**. The current look is a placeholder identity: charcoal `--ink`, warm off-white `--paper`, copper `--copper` accent; fonts are Big Shoulders Display (headings) and Barlow (body). Change these via the tokens in `global.css`.
+- Keep it plain and human-made: the owner asked for a cleaner, less "designed" site. No decorative gimmicks (spinning badges, scrolling tickers, slanted section edges, cut-corner buttons, offset frames, numbered "01 —" labels, giant outline text). Square edges with a small radius, solid colors, real photos, a short fade-in as the only motion. Write headlines plainly and avoid clichés like "speaks for itself".
 - Use `--copper` for text on light backgrounds (AA contrast with white) and `--copper-hi` only on dark backgrounds.
 
 ## Quality Bar
 
 - Semantic HTML, one `<h1>` per page, accessible contrast (WCAG AA), keyboard-navigable menu and lightbox.
-- Per-page `<title>` and meta description; LocalBusiness / RoofingContractor JSON-LD once the address is known.
+- Per-page `<title>` and meta description; RoofingContractor JSON-LD in `Base.astro` (city and areaServed now; add the street address once known).
 - Optimized, lazy-loaded, responsive images.
 - Verify layouts at phone (~375px), tablet (~768px), and desktop (~1440px) widths before calling UI work done. Check for horizontal overflow, including the header at common laptop widths (1280–1512px). The full nav shows from 1360px, and below that the header shows a phone number and a hamburger menu.
 - `SITE.placeholderPhotos` in `site.ts` shows a "representative examples" notice on /projects. Set it to `false` once real photos replace the stock ones.
 
 ## Pending From Owner
 
-Address and service area, logo and brand colors, real photos, reviews, company history/experience, and form delivery destination (email/CRM).
+Street address, logo and brand colors, real photos, reviews, company history/experience, and form delivery destination (email/CRM).

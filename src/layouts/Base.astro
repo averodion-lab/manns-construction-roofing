@@ -12,15 +12,18 @@ interface Props {
 const { title, description = SITE.description } = Astro.props;
 const fullTitle = title === SITE.name ? `${SITE.name} | Licensed & Insured Roofing & Construction` : `${title} | ${SITE.name}`;
 
-// Minimal LocalBusiness data. TODO: add address, areaServed, and url once the owner provides them.
+// LocalBusiness data. TODO: add streetAddress, postalCode, and url once the owner provides them.
 const business = {
   '@context': 'https://schema.org',
   '@type': 'RoofingContractor',
   name: SITE.name,
   telephone: '+1-912-246-9486',
   description: SITE.description,
-  ...(SITE.address ? { address: SITE.address } : {}),
-  ...(SITE.serviceArea ? { areaServed: SITE.serviceArea } : {}),
+  address: { '@type': 'PostalAddress', addressLocality: SITE.city, addressRegion: SITE.region, addressCountry: 'US' },
+  areaServed: [
+    { '@type': 'State', name: 'Georgia' },
+    { '@type': 'State', name: 'Florida' },
+  ],
 };
 ---
 <!doctype html>
@@ -41,7 +44,7 @@ const business = {
     <link rel="preconnect" href="https://images.unsplash.com" />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Big+Shoulders+Display:wght@700;800;900&family=IBM+Plex+Mono:wght@500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Big+Shoulders+Display:wght@700;800;900&display=swap"
     />
     <script is:inline>document.documentElement.classList.add('js');</script>
     <script type="application/ld+json" set:html={JSON.stringify(business)} />

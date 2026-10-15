@@ -45,8 +45,7 @@ const year = new Date().getFullYear();
         <p>{SITE.description}</p>
         <a class="phone-big" href={SITE.phoneHref}><Icon name="phone" />{SITE.phone}</a>
         <div><span class="badge"><Icon name="shield" /> {SITE.status}</span></div>
-        {SITE.address && <p>{SITE.address}</p>}
-        {SITE.serviceArea && <p>Serving {SITE.serviceArea}</p>}
+        <p>Based in {SITE.location}<br />Serving {SITE.serviceArea}</p>
       </div>
       <div>
         <h3>Services</h3>
@@ -65,7 +64,6 @@ const year = new Date().getFullYear();
         <ul>{company.map(([l, h]) => <li><a href={h}>{l}</a></li>)}</ul>
       </div>
     </div>
-    <div class="footer-word" aria-hidden="true">Manns</div>
     <div class="footer-bottom">
       <span>© {year} {SITE.name}. All rights reserved.</span>
       <span>{SITE.status}</span>

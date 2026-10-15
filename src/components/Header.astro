@@ -13,11 +13,7 @@ const menuServices = SERVICES.map((s) => ({ label: s.name, href: `/${s.slug}` })
 
 <div class="utility">
   <div class="container">
-    <ul>
-      <li><Icon name="shield" /> {SITE.status}</li>
-      <li><Icon name="file" /> Free Estimates</li>
-      <li><Icon name="storm" /> Storm Damage Assistance</li>
-    </ul>
+    <span>Based in {SITE.location} · Serving {SITE.serviceArea}</span>
     <a href={SITE.phoneHref}><Icon name="phone" /> Call {SITE.phone}</a>
   </div>
 </div>

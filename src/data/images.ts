@@ -9,7 +9,12 @@ const unsplash = (id: string, alt: string): Img => ({
   alt,
 });
 
+const local = (file: string, alt: string): Img => ({ src: `/images/${file}`, alt });
+
 export const IMAGES = {
+  // Real Manns photos
+  ownerHouse: local('owner-house.jpg', 'Contractor standing beside a Manns Construction & Roofing yard sign in front of a white two-story home with a gray shingle roof'),
+  family: local('family.jpg', 'A family standing together in a grassy field at sunset'),
   roofer: unsplash('1635424710928-0544e8512eae', 'Roofer in a safety harness working on an asphalt shingle roof'),
   roofTearOff: unsplash('1632759145351-1d592919f522', 'Roofer standing on a roof during a shingle tear-off'),
   roofOld: unsplash('1572120360610-d971b9d7767c', 'Older home with a weathered shingle roof'),

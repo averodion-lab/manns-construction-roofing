@@ -5,7 +5,7 @@ import ContactForm from '../components/ContactForm.astro';
 import Icon from '../components/Icon.astro';
 import { SITE } from '../data/site';
 ---
-<Base title="Contact" description={`Contact Manns Construction & Roofing. Call ${SITE.phone} or send us a message.`}>
+<Base title="Contact" description={`Contact Manns Construction & Roofing in ${SITE.location}. Call ${SITE.phone} or send us a message.`}>
   <PageHero
     title="Contact Us"
     eyebrow={SITE.status}
@@ -25,8 +25,7 @@ import { SITE } from '../data/site';
         <h2 style="font-size:2.4rem">{SITE.name}</h2>
         <a class="phone-big" href={SITE.phoneHref}><Icon name="phone" />{SITE.phone}</a>
         <span class="badge" style="justify-self:start;margin:0"><Icon name="shield" /> {SITE.status}</span>
-        {SITE.address && <p>{SITE.address}</p>}
-        {SITE.serviceArea && <p class="muted">Serving {SITE.serviceArea}</p>}
+        <p class="muted">Based in {SITE.location}<br />Serving {SITE.serviceArea}</p>
         <!-- TODO: add Google Maps embed once the business address is provided. -->
         <div class="btn-row">
           <a class="btn btn--lg" href={SITE.phoneHref}><Icon name="phone" /> Call Now</a>

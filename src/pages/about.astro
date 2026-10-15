@@ -17,11 +17,11 @@ const values: { icon: IconName; title: string; text: string }[] = [
 ];
 const services = ['Roofing', 'Siding & Gutters', 'Construction & Additions', 'Custom Kitchens & Baths', 'Painting & Flooring', 'Decks & Pole Barns', 'Concrete & Driveways', 'Storm Damage Restoration', 'Inspections', 'Tree Removal', 'Land Clearing & Mulching', 'Skid Steer & Excavator', 'Demolition & Cleanup'];
 ---
-<Base title="About" description="Manns Construction & Roofing is a licensed & insured roofing and construction company committed to quality work and professional service.">
+<Base title="About" description="Manns Construction & Roofing is a licensed & insured roofing and construction company in Vidalia, GA, serving South Georgia and North Florida.">
   <PageHero
     title="About Manns Construction & Roofing"
     eyebrow="About us"
-    lead="A licensed & insured roofing and construction company built on quality work and honest service."
+    lead={`Licensed & insured roofing and construction, based in ${SITE.location} and serving ${SITE.serviceArea}.`}
     image="blueprints"
     crumbs={[{ label: 'About' }]}
   />
@@ -30,23 +30,40 @@ const services = ['Roofing', 'Siding & Gutters', 'Construction & Additions', 'Cu
     <div class="container split">
       <div class="reveal">
         <p class="eyebrow">Who we are</p>
-        <h2>Built on <span class="accent">quality</span> and trust.</h2>
+        <h2>A local contractor in {SITE.location}.</h2>
         <div class="stack lead muted" style="margin-top:22px">
           <p>
-            Manns Construction &amp; Roofing is a licensed &amp; insured contractor providing roofing, construction, storm
-            restoration, siding, gutters, concrete, and exterior services.
+            Manns Construction &amp; Roofing is a licensed &amp; insured contractor based in {SITE.location}. We work on homes and
+            property across {SITE.serviceArea}: roofing, construction, storm restoration, siding, gutters, concrete, and land work.
           </p>
           <p>
             We believe homeowners deserve a contractor who shows up, communicates clearly, and does the job right. Whether it’s a
             small roof repair or a new addition, every project gets the same attention to detail.
           </p>
         </div>
-        <span class="badge" style="color:var(--copper);border-color:var(--copper)"><Icon name="shield" /> {SITE.status}</span>
+        <span class="badge" style="color:var(--copper)"><Icon name="shield" /> {SITE.status}</span>
       </div>
       <div class="framed reveal" style="--d:100ms">
-        <!-- TODO: replace with a real company or team photo -->
-        <Img img="hardHats" sizes="(min-width: 960px) 50vw, 100vw" />
-        <span class="tag"><Icon name="hammer" /> Quality Work</span>
+        <Img img="ownerHouse" sizes="(min-width: 960px) 50vw, 100vw" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="container split">
+      <div class="framed reveal">
+        <Img img="family" sizes="(min-width: 960px) 50vw, 100vw" />
+      </div>
+      <div class="reveal" style="--d:100ms">
+        <p class="eyebrow">Our family</p>
+        <h2>We treat every home like our own.</h2>
+        <div class="stack lead muted" style="margin-top:22px">
+          <!-- TODO: owner to provide family / company story -->
+          <p>
+            When you hire Manns Construction &amp; Roofing, you’re working with people who care about doing right by their
+            neighbors, and who take the same care with your home that we would with ours.
+          </p>
+        </div>
       </div>
     </div>
   </section>
@@ -74,7 +91,7 @@ const services = ['Roofing', 'Siding & Gutters', 'Construction & Additions', 'Cu
     <div class="container split" style="align-items:start">
       <div class="reveal">
         <p class="eyebrow">Services provided</p>
-        <h2>One contractor. <span class="accent">Your whole property.</span></h2>
+        <h2>One contractor for the whole property.</h2>
         <p class="lead muted" style="margin-top:20px">From the roof to the driveway, we handle the work so you don’t have to juggle multiple contractors.</p>
         <a class="btn" href="/services" style="margin-top:28px">View Our Services <Icon name="arrow" /></a>
       </div>

@@ -7,10 +7,14 @@ export const SITE = {
   smsHref: 'sms:+19122469486',
   status: 'Licensed & Insured',
   description:
-    'Manns Construction & Roofing provides professional roofing, construction, remodeling, storm restoration, siding, gutters, concrete, tree removal, land clearing, and equipment services. Licensed & Insured.',
+    'Manns Construction & Roofing is a licensed & insured roofing and construction company based in Vidalia, GA, serving South Georgia and North Florida. Roofing, remodeling, storm restoration, siding, gutters, concrete, tree removal, and land clearing.',
+  // Based in Vidalia, GA. Street address not provided yet.
+  city: 'Vidalia',
+  region: 'GA',
+  location: 'Vidalia, GA',
+  serviceArea: 'South Georgia and North Florida',
   // TODO: owner to provide. Leave null until confirmed — never invent these.
   address: null as string | null,
-  serviceArea: null as string | null,
   email: null as string | null,
   // While true, the projects gallery shows a note that photos are representative examples.
   placeholderPhotos: true,
