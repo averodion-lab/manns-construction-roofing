@@ -762,7 +762,7 @@ export const SERVICES: Service[] = [
       { title: 'Site to Structure', text: 'Prep the land, then build on it with the same contractor.', icon: 'check' },
       { title: 'Licensed & Insured', text: 'Professional, protected work on your property.', icon: 'shield' },
     ],
-    gallery: ['excavatorSite', 'siteMachines', 'excavators'],
+    gallery: ['trackLoader', 'excavatorSite', 'siteMachines'],
     faqs: [
       { q: 'Can you prepare a site for a pole barn, slab, or addition?', a: 'Yes. We can clear and prepare the site, then handle the concrete and construction.' },
       { q: 'How do I get a quote for equipment work?', a: 'Call us or request a quote with a description and photos of the property. We may need to see the site before giving a price.' },
@@ -794,7 +794,7 @@ export const SERVICES: Service[] = [
       { title: 'Less Debris', text: 'Mulching leaves material in place instead of hauling piles away.', icon: 'check' },
       { title: 'Build-Ready', text: 'Clear the site, then build with the same contractor.', icon: 'home' },
     ],
-    gallery: ['siteMachines', 'forest', 'excavatorSite'],
+    gallery: ['trackLoader', 'forest', 'siteMachines'],
     faqs: [
       { q: 'What is mulching?', a: 'Mulching grinds brush, undergrowth, and small trees down in place, which leaves a layer of mulch on the ground instead of piles to haul away.' },
       { q: 'Can you clear land for a new building?', a: 'Yes. We can clear and prepare the site, then handle concrete, pole barns, and other construction.' },
@@ -986,7 +986,7 @@ export const CATEGORIES: Category[] = [
   {
     name: 'Land Clearing & Mulching',
     href: '/land-clearing',
-    image: 'forest',
+    image: 'trackLoader',
     text: 'Overgrown land cleared and mulched so you can use it or build on it.',
     items: [
       { label: 'Land Clearing', href: '/land-clearing' },
